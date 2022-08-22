@@ -1,0 +1,2 @@
+# rosrun --prefix 'gdb -ex run --args' ORB_SLAM3 Mono /home/lachlan/fyp/other_orbslam/ORB_SLAM3/Vocabulary/ORBvoc.txt /home/lachlan/fyp/other_orbslam/ORB_SLAM3/Examples/Mono/EuRoC.yaml false  
+rosrun --prefix 'gdb -ex run --args' ORB_SLAM3 Mono_Inertial /home/lachlan/fyp/other_orbslam/ORB_SLAM3/Vocabulary/ORBvoc.txt /home/lachlan/fyp/other_orbslam2/ORB_SLAM3/Examples/RGB-D/mono_inertial_oakd.yaml
