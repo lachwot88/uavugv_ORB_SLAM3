@@ -26,6 +26,9 @@
 #include <cv_bridge/cv_bridge.h>
 
 #include<opencv2/core/core.hpp>
+#include "opencv2/imgcodecs/legacy/constants_c.h"
+
+
 
 #include"../../../include/System.h"
 
@@ -59,7 +62,8 @@ int main(int argc, char **argv)
     ImageGrabber igb(&SLAM);
 
     ros::NodeHandle nodeHandler;
-    ros::Subscriber sub = nodeHandler.subscribe("/camera/image_raw", 1, &ImageGrabber::GrabImage,&igb);
+    // ros::Subscriber sub = nodeHandler.subscribe("/camera/image_raw", 1, &ImageGrabber::GrabImage,&igb); // Old topic subscription
+    ros::Subscriber sub = nodeHandler.subscribe("/rgb_stereo_publisher/color/image", 1, &ImageGrabber::GrabImage,&igb); // RGB Subscriptions
 
     ros::spin();
 

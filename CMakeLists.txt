@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8)
 project(ORB_SLAM3)
 
+set(CMAKE_CXX_STANDARD 14) # So that we can compile properly
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 IF(NOT CMAKE_BUILD_TYPE)
   SET(CMAKE_BUILD_TYPE Release)
 ENDIF()
@@ -30,17 +33,22 @@ endif()
 
 LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
 
-find_package(OpenCV 4.4)
-   if(NOT OpenCV_FOUND)
-      message(FATAL_ERROR "OpenCV > 4.4 not found.")
-   endif()
+find_package(OpenCV 4.4 REQUIRED)
+if(NOT OpenCV_FOUND)
+message(FATAL_ERROR "OpenCV > 4.4 not found.")
+endif()
+
+# find_package(OpenCV 3.2 QUIET)
+# if(NOT OpenCV_FOUND)
+# 	message(FATAL_ERROR "OpenCV > 3.2 not found.")
+# endif()
 
 MESSAGE("OPENCV VERSION:")
 MESSAGE(${OpenCV_VERSION})
 
 find_package(Eigen3 3.1.0 REQUIRED)
 find_package(Pangolin REQUIRED)
-find_package(realsense2)
+# find_package(realsense2)
 
 include_directories(
 ${PROJECT_SOURCE_DIR}

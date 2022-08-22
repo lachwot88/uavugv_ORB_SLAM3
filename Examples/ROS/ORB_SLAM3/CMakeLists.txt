@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.4.6)
 include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 
+set(CMAKE_CXX_STANDARD 14) # So that we can compile properly
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 rosbuild_init()
 
 IF(NOT ROS_BUILD_TYPE)
@@ -30,10 +33,15 @@ endif()
 
 LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/../../../cmake_modules)
 
-find_package(OpenCV 4.4 QUIET)
-if(NOT OpenCV_FOUND)
-	message(FATAL_ERROR "OpenCV > 4.4 not found.")
-endif()
+find_package(OpenCV 4.4 REQUIRED)
+   if(NOT OpenCV_FOUND)
+      message(FATAL_ERROR "OpenCV > 4.4 not found.")
+   endif()
+
+# find_package(OpenCV 3.2 QUIET)
+# if(NOT OpenCV_FOUND)
+# 	message(FATAL_ERROR "OpenCV > 3.2 not found.")
+# endif()
 
 find_package(Eigen3 3.1.0 REQUIRED)
 find_package(Pangolin REQUIRED)
@@ -54,6 +62,10 @@ ${Pangolin_LIBRARIES}
 ${PROJECT_SOURCE_DIR}/../../../Thirdparty/DBoW2/lib/libDBoW2.so
 ${PROJECT_SOURCE_DIR}/../../../Thirdparty/g2o/lib/libg2o.so
 ${PROJECT_SOURCE_DIR}/../../../lib/libORB_SLAM3.so
+
+# Added after copying opencv libraries over
+${PROJECT_SOURCE_DIR}/../../../lib/libopencv_core.so
+${PROJECT_SOURCE_DIR}/../../../lib/libopencv_imgproc.so
 -lboost_system
 )
 

@@ -95,8 +95,14 @@ int main(int argc, char **argv)
   ImageGrabber igb(&SLAM,&imugb,bEqual); // TODO
   
   // Maximum delay, 5 seconds
-  ros::Subscriber sub_imu = n.subscribe("/imu", 1000, &ImuGrabber::GrabImu, &imugb); 
-  ros::Subscriber sub_img0 = n.subscribe("/camera/image_raw", 100, &ImageGrabber::GrabImage,&igb);
+  // OLD TOPICS 
+  // ros::Subscriber sub_imu = n.subscribe("/imu", 1000, &ImuGrabber::GrabImu, &imugb); 
+  // ros::Subscriber sub_img0 = n.subscribe("/camera/image_raw", 100, &ImageGrabber::GrabImage,&igb);
+  
+  // NEW TOPICS
+  ros::Subscriber sub_imu = n.subscribe("/mavros/imu/data_raw", 1000, &ImuGrabber::GrabImu, &imugb); // Taking the 3 most recent values since the IMU does not publish fast 
+  // ros::Subscriber sub_img0 = n.subscribe("/rgb_stereo_publisher/color/image", 100, &ImageGrabber::GrabImage,&igb);
+  ros::Subscriber sub_img0 = n.subscribe("/camera/left/image_raw", 200, &ImageGrabber::GrabImage,&igb);
 
   std::thread sync_thread(&ImageGrabber::SyncWithImu,&igb);
 
