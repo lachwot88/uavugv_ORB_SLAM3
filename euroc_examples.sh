@@ -1,4 +1,6 @@
 #!/bin/bash
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd ) # Fetching current file path
+
 pathDatasetEuroc='/home/lachlan/fyp/orbslam_examples' #Example, it is necesary to change it by the dataset path
 
 #------------------------------------
